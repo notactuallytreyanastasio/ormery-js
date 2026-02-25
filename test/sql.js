@@ -22,7 +22,7 @@ it("string escaping", function () {
       const actual_141 = build_136("world");
       let t_142 = actual_141 === "select * from hi where name = 'world'";
       function fn_143() {
-        return "expected build(\u0022world\u0022) == (" + "select * from hi where name = 'world'" + ") not (" + actual_141 + ")";
+        return 'expected build("world") == (' + "select * from hi where name = 'world'" + ") not (" + actual_141 + ")";
       }
       test_134.assert(t_142, fn_143);
       const bobbyTables_144 = "Robert'); drop table hi;--";
@@ -50,7 +50,7 @@ it("string edge cases", function () {
       const actual_151 = t_150.accumulated.toString();
       let t_152 = actual_151 === "v = ''";
       function fn_153() {
-        return "expected stringExpr(`-work/src//sql/`.sql, true, \u0022v = \u0022, \\interpolate, \u0022\u0022).toString() == (" + "v = ''" + ") not (" + actual_151 + ")";
+        return 'expected stringExpr(`-work/src//sql/`.sql, true, "v = ", \\interpolate, "").toString() == (' + "v = ''" + ") not (" + actual_151 + ")";
       }
       test_149.assert(t_152, fn_153);
       let t_154 = new SqlBuilder();
@@ -59,7 +59,7 @@ it("string edge cases", function () {
       const actual_155 = t_154.accumulated.toString();
       let t_156 = actual_155 === "v = 'a''''b'";
       function fn_157() {
-        return "expected stringExpr(`-work/src//sql/`.sql, true, \u0022v = \u0022, \\interpolate, \u0022a''b\u0022).toString() == (" + "v = 'a''''b'" + ") not (" + actual_155 + ")";
+        return "expected stringExpr(`-work/src//sql/`.sql, true, \"v = \", \\interpolate, \"a''b\").toString() == (" + "v = 'a''''b'" + ") not (" + actual_155 + ")";
       }
       test_149.assert(t_156, fn_157);
       let t_158 = new SqlBuilder();
@@ -68,7 +68,7 @@ it("string edge cases", function () {
       const actual_159 = t_158.accumulated.toString();
       let t_160 = actual_159 === "v = 'Hello 世界'";
       function fn_161() {
-        return "expected stringExpr(`-work/src//sql/`.sql, true, \u0022v = \u0022, \\interpolate, \u0022Hello 世界\u0022).toString() == (" + "v = 'Hello 世界'" + ") not (" + actual_159 + ")";
+        return 'expected stringExpr(`-work/src//sql/`.sql, true, "v = ", \\interpolate, "Hello 世界").toString() == (' + "v = 'Hello 世界'" + ") not (" + actual_159 + ")";
       }
       test_149.assert(t_160, fn_161);
       let t_162 = new SqlBuilder();
@@ -77,7 +77,7 @@ it("string edge cases", function () {
       const actual_163 = t_162.accumulated.toString();
       let t_164 = actual_163 === "v = 'Line1\nLine2'";
       function fn_165() {
-        return "expected stringExpr(`-work/src//sql/`.sql, true, \u0022v = \u0022, \\interpolate, \u0022Line1\\nLine2\u0022).toString() == (" + "v = 'Line1\nLine2'" + ") not (" + actual_163 + ")";
+        return 'expected stringExpr(`-work/src//sql/`.sql, true, "v = ", \\interpolate, "Line1\\nLine2").toString() == (' + "v = 'Line1\nLine2'" + ") not (" + actual_163 + ")";
       }
       test_149.assert(t_164, fn_165);
       return;
@@ -103,7 +103,7 @@ it("numbers and booleans", function () {
       const actual_169 = t_168.accumulated.toString();
       let t_170 = actual_169 === "select 42, 43, 19.99, TRUE, FALSE";
       function fn_171() {
-        return "expected stringExpr(`-work/src//sql/`.sql, true, \u0022select \u0022, \\interpolate, 42, \u0022, \u0022, \\interpolate, 43, \u0022, \u0022, \\interpolate, 19.99, \u0022, \u0022, \\interpolate, true, \u0022, \u0022, \\interpolate, false).toString() == (" + "select 42, 43, 19.99, TRUE, FALSE" + ") not (" + actual_169 + ")";
+        return 'expected stringExpr(`-work/src//sql/`.sql, true, "select ", \\interpolate, 42, ", ", \\interpolate, 43, ", ", \\interpolate, 19.99, ", ", \\interpolate, true, ", ", \\interpolate, false).toString() == (' + "select 42, 43, 19.99, TRUE, FALSE" + ") not (" + actual_169 + ")";
       }
       test_166.assert(t_170, fn_171);
       let date_172;
@@ -120,7 +120,7 @@ it("numbers and booleans", function () {
       const actual_175 = t_174.accumulated.toString();
       let t_176 = actual_175 === "insert into t values ('2024-12-25')";
       function fn_177() {
-        return "expected stringExpr(`-work/src//sql/`.sql, true, \u0022insert into t values (\u0022, \\interpolate, date, \u0022)\u0022).toString() == (" + "insert into t values ('2024-12-25')" + ") not (" + actual_175 + ")";
+        return 'expected stringExpr(`-work/src//sql/`.sql, true, "insert into t values (", \\interpolate, date, ")").toString() == (' + "insert into t values ('2024-12-25')" + ") not (" + actual_175 + ")";
       }
       test_166.assert(t_176, fn_177);
       return;
@@ -142,7 +142,7 @@ it("lists", function () {
       const actual_184 = t_183.accumulated.toString();
       let t_185 = actual_184 === "v IN ('a', 'b', 'c''d')";
       function fn_186() {
-        return "expected stringExpr(`-work/src//sql/`.sql, true, \u0022v IN (\u0022, \\interpolate, list(\u0022a\u0022, \u0022b\u0022, \u0022c'd\u0022), \u0022)\u0022).toString() == (" + "v IN ('a', 'b', 'c''d')" + ") not (" + actual_184 + ")";
+        return "expected stringExpr(`-work/src//sql/`.sql, true, \"v IN (\", \\interpolate, list(\"a\", \"b\", \"c'd\"), \")\").toString() == (" + "v IN ('a', 'b', 'c''d')" + ") not (" + actual_184 + ")";
       }
       test_178.assert(t_185, fn_186);
       let t_187 = new SqlBuilder();
@@ -152,7 +152,7 @@ it("lists", function () {
       const actual_188 = t_187.accumulated.toString();
       let t_189 = actual_188 === "v IN (1, 2, 3)";
       function fn_190() {
-        return "expected stringExpr(`-work/src//sql/`.sql, true, \u0022v IN (\u0022, \\interpolate, list(1, 2, 3), \u0022)\u0022).toString() == (" + "v IN (1, 2, 3)" + ") not (" + actual_188 + ")";
+        return 'expected stringExpr(`-work/src//sql/`.sql, true, "v IN (", \\interpolate, list(1, 2, 3), ")").toString() == (' + "v IN (1, 2, 3)" + ") not (" + actual_188 + ")";
       }
       test_178.assert(t_189, fn_190);
       let t_191 = new SqlBuilder();
@@ -162,7 +162,7 @@ it("lists", function () {
       const actual_192 = t_191.accumulated.toString();
       let t_193 = actual_192 === "v IN (1, 2)";
       function fn_194() {
-        return "expected stringExpr(`-work/src//sql/`.sql, true, \u0022v IN (\u0022, \\interpolate, list(1, 2), \u0022)\u0022).toString() == (" + "v IN (1, 2)" + ") not (" + actual_192 + ")";
+        return 'expected stringExpr(`-work/src//sql/`.sql, true, "v IN (", \\interpolate, list(1, 2), ")").toString() == (' + "v IN (1, 2)" + ") not (" + actual_192 + ")";
       }
       test_178.assert(t_193, fn_194);
       let t_195 = new SqlBuilder();
@@ -172,7 +172,7 @@ it("lists", function () {
       const actual_196 = t_195.accumulated.toString();
       let t_197 = actual_196 === "v IN (1.0, 2.0)";
       function fn_198() {
-        return "expected stringExpr(`-work/src//sql/`.sql, true, \u0022v IN (\u0022, \\interpolate, list(1.0, 2.0), \u0022)\u0022).toString() == (" + "v IN (1.0, 2.0)" + ") not (" + actual_196 + ")";
+        return 'expected stringExpr(`-work/src//sql/`.sql, true, "v IN (", \\interpolate, list(1.0, 2.0), ")").toString() == (' + "v IN (1.0, 2.0)" + ") not (" + actual_196 + ")";
       }
       test_178.assert(t_197, fn_198);
       let t_199 = new SqlBuilder();
@@ -182,7 +182,7 @@ it("lists", function () {
       const actual_200 = t_199.accumulated.toString();
       let t_201 = actual_200 === "v IN (TRUE, FALSE)";
       function fn_202() {
-        return "expected stringExpr(`-work/src//sql/`.sql, true, \u0022v IN (\u0022, \\interpolate, list(true, false), \u0022)\u0022).toString() == (" + "v IN (TRUE, FALSE)" + ") not (" + actual_200 + ")";
+        return 'expected stringExpr(`-work/src//sql/`.sql, true, "v IN (", \\interpolate, list(true, false), ")").toString() == (' + "v IN (TRUE, FALSE)" + ") not (" + actual_200 + ")";
       }
       test_178.assert(t_201, fn_202);
       try {
@@ -205,7 +205,7 @@ it("lists", function () {
       const actual_205 = t_204.accumulated.toString();
       let t_206 = actual_205 === "v IN ('2024-01-01', '2024-12-25')";
       function fn_207() {
-        return "expected stringExpr(`-work/src//sql/`.sql, true, \u0022v IN (\u0022, \\interpolate, dates, \u0022)\u0022).toString() == (" + "v IN ('2024-01-01', '2024-12-25')" + ") not (" + actual_205 + ")";
+        return 'expected stringExpr(`-work/src//sql/`.sql, true, "v IN (", \\interpolate, dates, ")").toString() == (' + "v IN ('2024-01-01', '2024-12-25')" + ") not (" + actual_205 + ")";
       }
       test_178.assert(t_206, fn_207);
       return;
@@ -227,7 +227,7 @@ it("nesting", function () {
       const actual_213 = t_212.accumulated.toString();
       let t_214 = actual_213 === "select p.id from person p where p.last_name = 'Someone'";
       function fn_215() {
-        return "expected stringExpr(`-work/src//sql/`.sql, true, \u0022select p.id from person p \u0022, \\interpolate, condition).toString() == (" + "select p.id from person p where p.last_name = 'Someone'" + ") not (" + actual_213 + ")";
+        return 'expected stringExpr(`-work/src//sql/`.sql, true, "select p.id from person p ", \\interpolate, condition).toString() == (' + "select p.id from person p where p.last_name = 'Someone'" + ") not (" + actual_213 + ")";
       }
       test_208.assert(t_214, fn_215);
       let t_216 = new SqlBuilder();
@@ -236,7 +236,7 @@ it("nesting", function () {
       const actual_217 = t_216.accumulated.toString();
       let t_218 = actual_217 === "select p.id from person p where p.last_name = 'Someone'";
       function fn_219() {
-        return "expected stringExpr(`-work/src//sql/`.sql, true, \u0022select p.id from person p \u0022, \\interpolate, condition.toSource()).toString() == (" + "select p.id from person p where p.last_name = 'Someone'" + ") not (" + actual_217 + ")";
+        return 'expected stringExpr(`-work/src//sql/`.sql, true, "select p.id from person p ", \\interpolate, condition.toSource()).toString() == (' + "select p.id from person p where p.last_name = 'Someone'" + ") not (" + actual_217 + ")";
       }
       test_208.assert(t_218, fn_219);
       const parts_220 = Object.freeze([new SqlString("a'b"), new SqlInt32(3)]);
@@ -246,7 +246,7 @@ it("nesting", function () {
       const actual_222 = t_221.accumulated.toString();
       let t_223 = actual_222 === "select 'a''b', 3";
       function fn_224() {
-        return "expected stringExpr(`-work/src//sql/`.sql, true, \u0022select \u0022, \\interpolate, parts).toString() == (" + "select 'a''b', 3" + ") not (" + actual_222 + ")";
+        return 'expected stringExpr(`-work/src//sql/`.sql, true, "select ", \\interpolate, parts).toString() == (' + "select 'a''b', 3" + ") not (" + actual_222 + ")";
       }
       test_208.assert(t_223, fn_224);
       return;

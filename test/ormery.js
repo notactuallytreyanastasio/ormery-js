@@ -63,11 +63,11 @@ it("toSql: where int", function () {
     try {
       const s_1716 = schema("users", Object.freeze([field("age", "Int", false, false)]));
       const store_1717 = new InMemoryStore();
-      const q_1718 = new Query(s_1716, store_1717).where("age", "\u003e=", "18");
+      const q_1718 = new Query(s_1716, store_1717).where("age", ">=", "18");
       const actual_1719 = q_1718.toSql().toString();
-      let t_1720 = actual_1719 === "SELECT * FROM users WHERE age \u003e= 18";
+      let t_1720 = actual_1719 === "SELECT * FROM users WHERE age >= 18";
       function fn_1721() {
-        return "expected q.toSql().toString() == (" + "SELECT * FROM users WHERE age \u003e= 18" + ") not (" + actual_1719 + ")";
+        return "expected q.toSql().toString() == (" + "SELECT * FROM users WHERE age >= 18" + ") not (" + actual_1719 + ")";
       }
       test_1715.assert(t_1720, fn_1721);
       return;
@@ -133,11 +133,11 @@ it("toSql: multiple where", function () {
     try {
       const s_1746 = schema("users", Object.freeze([field("age", "Int", false, false)]));
       const store_1747 = new InMemoryStore();
-      const q_1748 = new Query(s_1746, store_1747).where("age", "\u003e=", "18").where("age", "\u003c", "30");
+      const q_1748 = new Query(s_1746, store_1747).where("age", ">=", "18").where("age", "<", "30");
       const actual_1749 = q_1748.toSql().toString();
-      let t_1750 = actual_1749 === "SELECT * FROM users WHERE age \u003e= 18 AND age \u003c 30";
+      let t_1750 = actual_1749 === "SELECT * FROM users WHERE age >= 18 AND age < 30";
       function fn_1751() {
-        return "expected q.toSql().toString() == (" + "SELECT * FROM users WHERE age \u003e= 18 AND age \u003c 30" + ") not (" + actual_1749 + ")";
+        return "expected q.toSql().toString() == (" + "SELECT * FROM users WHERE age >= 18 AND age < 30" + ") not (" + actual_1749 + ")";
       }
       test_1745.assert(t_1750, fn_1751);
       return;
@@ -218,11 +218,11 @@ it("toSql: complex query", function () {
     try {
       const s_1781 = schema("users", Object.freeze([field("name", "String", false, false), field("age", "Int", false, false)]));
       const store_1782 = new InMemoryStore();
-      const q_1783 = new Query(s_1781, store_1782).select(Object.freeze(["name", "age"])).where("age", "\u003e=", "18").orderBy("age", "desc").limit(10).offset(20);
+      const q_1783 = new Query(s_1781, store_1782).select(Object.freeze(["name", "age"])).where("age", ">=", "18").orderBy("age", "desc").limit(10).offset(20);
       const actual_1784 = q_1783.toSql().toString();
-      let t_1785 = actual_1784 === "SELECT name, age FROM users WHERE age \u003e= 18 ORDER BY age DESC LIMIT 10 OFFSET 20";
+      let t_1785 = actual_1784 === "SELECT name, age FROM users WHERE age >= 18 ORDER BY age DESC LIMIT 10 OFFSET 20";
       function fn_1786() {
-        return "expected q.toSql().toString() == (" + "SELECT name, age FROM users WHERE age \u003e= 18 ORDER BY age DESC LIMIT 10 OFFSET 20" + ") not (" + actual_1784 + ")";
+        return "expected q.toSql().toString() == (" + "SELECT name, age FROM users WHERE age >= 18 ORDER BY age DESC LIMIT 10 OFFSET 20" + ") not (" + actual_1784 + ")";
       }
       test_1780.assert(t_1785, fn_1786);
       return;
@@ -319,11 +319,11 @@ it("toSqlQuery: standalone", function () {
     const test_1824 = new Test_1694();
     try {
       const s_1825 = schema("users", Object.freeze([field("name", "String", false, false), field("age", "Int", false, false)]));
-      const result_1826 = toSqlQuery(s_1825, Object.freeze(["name"]), Object.freeze([new WhereClause("age", "\u003e", "21")]), Object.freeze([new OrderClause("name", "asc")]), 5, 0);
+      const result_1826 = toSqlQuery(s_1825, Object.freeze(["name"]), Object.freeze([new WhereClause("age", ">", "21")]), Object.freeze([new OrderClause("name", "asc")]), 5, 0);
       const actual_1827 = result_1826.toString();
-      let t_1828 = actual_1827 === "SELECT name FROM users WHERE age \u003e 21 ORDER BY name ASC LIMIT 5";
+      let t_1828 = actual_1827 === "SELECT name FROM users WHERE age > 21 ORDER BY name ASC LIMIT 5";
       function fn_1829() {
-        return "expected result.toString() == (" + "SELECT name FROM users WHERE age \u003e 21 ORDER BY name ASC LIMIT 5" + ") not (" + actual_1827 + ")";
+        return "expected result.toString() == (" + "SELECT name FROM users WHERE age > 21 ORDER BY name ASC LIMIT 5" + ") not (" + actual_1827 + ")";
       }
       test_1824.assert(t_1828, fn_1829);
       return;
@@ -387,27 +387,27 @@ it("isValidIdentifier: valid names", function () {
     try {
       let t_1852 = isValidIdentifier("users");
       function fn_1853() {
-        return "expected `-work/src//`.isValidIdentifier(\u0022users\u0022)";
+        return 'expected `-work/src//`.isValidIdentifier("users")';
       }
       test_1851.assert(t_1852, fn_1853);
       let t_1854 = isValidIdentifier("user_table");
       function fn_1855() {
-        return "expected `-work/src//`.isValidIdentifier(\u0022user_table\u0022)";
+        return 'expected `-work/src//`.isValidIdentifier("user_table")';
       }
       test_1851.assert(t_1854, fn_1855);
       let t_1856 = isValidIdentifier("Table1");
       function fn_1857() {
-        return "expected `-work/src//`.isValidIdentifier(\u0022Table1\u0022)";
+        return 'expected `-work/src//`.isValidIdentifier("Table1")';
       }
       test_1851.assert(t_1856, fn_1857);
       let t_1858 = isValidIdentifier("_private");
       function fn_1859() {
-        return "expected `-work/src//`.isValidIdentifier(\u0022_private\u0022)";
+        return 'expected `-work/src//`.isValidIdentifier("_private")';
       }
       test_1851.assert(t_1858, fn_1859);
       let t_1860 = isValidIdentifier("a");
       function fn_1861() {
-        return "expected `-work/src//`.isValidIdentifier(\u0022a\u0022)";
+        return 'expected `-work/src//`.isValidIdentifier("a")';
       }
       test_1851.assert(t_1860, fn_1861);
       return;
@@ -420,32 +420,32 @@ it("isValidIdentifier: invalid names", function () {
     try {
       let t_1863 = ! isValidIdentifier("");
       function fn_1864() {
-        return "expected !`-work/src//`.isValidIdentifier(\u0022\u0022)";
+        return 'expected !`-work/src//`.isValidIdentifier("")';
       }
       test_1862.assert(t_1863, fn_1864);
       let t_1865 = ! isValidIdentifier("users; DROP TABLE");
       function fn_1866() {
-        return "expected !`-work/src//`.isValidIdentifier(\u0022users; DROP TABLE\u0022)";
+        return 'expected !`-work/src//`.isValidIdentifier("users; DROP TABLE")';
       }
       test_1862.assert(t_1865, fn_1866);
       let t_1867 = ! isValidIdentifier("users--");
       function fn_1868() {
-        return "expected !`-work/src//`.isValidIdentifier(\u0022users--\u0022)";
+        return 'expected !`-work/src//`.isValidIdentifier("users--")';
       }
       test_1862.assert(t_1867, fn_1868);
       let t_1869 = ! isValidIdentifier("ta ble");
       function fn_1870() {
-        return "expected !`-work/src//`.isValidIdentifier(\u0022ta ble\u0022)";
+        return 'expected !`-work/src//`.isValidIdentifier("ta ble")';
       }
       test_1862.assert(t_1869, fn_1870);
       let t_1871 = ! isValidIdentifier("table.name");
       function fn_1872() {
-        return "expected !`-work/src//`.isValidIdentifier(\u0022table.name\u0022)";
+        return 'expected !`-work/src//`.isValidIdentifier("table.name")';
       }
       test_1862.assert(t_1871, fn_1872);
       let t_1873 = ! isValidIdentifier("Robert'); DROP TABLE users;--");
       function fn_1874() {
-        return "expected !`-work/src//`.isValidIdentifier(\u0022Robert'); DROP TABLE users;--\u0022)";
+        return "expected !`-work/src//`.isValidIdentifier(\"Robert'); DROP TABLE users;--\")";
       }
       test_1862.assert(t_1873, fn_1874);
       return;

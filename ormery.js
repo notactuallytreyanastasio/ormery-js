@@ -44,7 +44,7 @@ export class DemoController extends type__1232() {
   }
   /** @returns {number} */
   getAdultCount() {
-    return new Query(this.#schema_1191, this.#store_1192).where("age", "\u003e=", "18").all().length;
+    return new Query(this.#schema_1191, this.#store_1192).where("age", ">=", "18").all().length;
   }
   /** @returns {number} */
   getQueryCount() {
@@ -79,16 +79,16 @@ export class DemoController extends type__1232() {
   /** @returns {string} */
   runDemo2() {
     this.#incrementQueryCount_1201();
-    const results_1217 = new Query(this.#schema_1191, this.#store_1192).where("age", "\u003e=", "18").all();
+    const results_1217 = new Query(this.#schema_1191, this.#store_1192).where("age", ">=", "18").all();
     const formatted_1218 = this.#formatRecords_1204(results_1217);
-    return "=== Demo 2: Filter Adults ===" + "\n" + "\n" + "Query: new Query(userSchema, store)" + "\n" + "  .where(" + "\u0022" + "age" + "\u0022" + ", " + "\u0022" + "\u003e=" + "\u0022" + ", " + "\u0022" + "18" + "\u0022" + ")" + "\n" + "  .all()" + "\n" + "\n" + "Results:" + "\n" + formatted_1218 + "\n" + "\n" + "Total: " + results_1217.length.toString() + " adults found";
+    return "=== Demo 2: Filter Adults ===" + "\n" + "\n" + "Query: new Query(userSchema, store)" + "\n" + "  .where(" + '"' + "age" + '"' + ", " + '"' + ">=" + '"' + ", " + '"' + "18" + '"' + ")" + "\n" + "  .all()" + "\n" + "\n" + "Results:" + "\n" + formatted_1218 + "\n" + "\n" + "Total: " + results_1217.length.toString() + " adults found";
   }
   /** @returns {string} */
   runDemo3() {
     this.#incrementQueryCount_1201();
     const results_1220 = new Query(this.#schema_1191, this.#store_1192).orderBy("age", "desc").all();
     const formatted_1221 = this.#formatRecords_1204(results_1220);
-    return "=== Demo 3: Sort by Age (Descending) ===" + "\n" + "\n" + "Query: new Query(userSchema, store)" + "\n" + "  .orderBy(" + "\u0022" + "age" + "\u0022" + ", " + "\u0022" + "desc" + "\u0022" + ")" + "\n" + "  .all()" + "\n" + "\n" + "Results (ordered by age, oldest first):" + "\n" + formatted_1221;
+    return "=== Demo 3: Sort by Age (Descending) ===" + "\n" + "\n" + "Query: new Query(userSchema, store)" + "\n" + "  .orderBy(" + '"' + "age" + '"' + ", " + '"' + "desc" + '"' + ")" + "\n" + "  .all()" + "\n" + "\n" + "Results (ordered by age, oldest first):" + "\n" + formatted_1221;
   }
   /** @returns {string} */
   runDemo4() {
@@ -97,14 +97,14 @@ export class DemoController extends type__1232() {
     const page2_1224 = new Query(this.#schema_1191, this.#store_1192).orderBy("id", "asc").offset(2).limit(2).all();
     const formatted1_1225 = this.#formatRecords_1204(page1_1223);
     const formatted2_1226 = this.#formatRecords_1204(page2_1224);
-    return "=== Demo 4: Pagination ===" + "\n" + "\n" + "Page 1: .orderBy(" + "\u0022" + "id" + "\u0022" + ", " + "\u0022" + "asc" + "\u0022" + ").limit(2)" + "\n" + "\n" + formatted1_1225 + "\n" + "\n" + "Page 2: .orderBy(" + "\u0022" + "id" + "\u0022" + ", " + "\u0022" + "asc" + "\u0022" + ").offset(2).limit(2)" + "\n" + "\n" + formatted2_1226;
+    return "=== Demo 4: Pagination ===" + "\n" + "\n" + "Page 1: .orderBy(" + '"' + "id" + '"' + ", " + '"' + "asc" + '"' + ").limit(2)" + "\n" + "\n" + formatted1_1225 + "\n" + "\n" + "Page 2: .orderBy(" + '"' + "id" + '"' + ", " + '"' + "asc" + '"' + ").offset(2).limit(2)" + "\n" + "\n" + formatted2_1226;
   }
   /** @returns {string} */
   runDemo5() {
     this.#incrementQueryCount_1201();
-    const results_1228 = new Query(this.#schema_1191, this.#store_1192).where("age", "\u003e=", "18").where("email", "!=", "").orderBy("age", "desc").select(Object.freeze(["name", "age"])).limit(2).all();
+    const results_1228 = new Query(this.#schema_1191, this.#store_1192).where("age", ">=", "18").where("email", "!=", "").orderBy("age", "desc").select(Object.freeze(["name", "age"])).limit(2).all();
     const formatted_1229 = this.#formatRecords_1204(results_1228);
-    return "=== Demo 5: Complex Query ===" + "\n" + "\n" + "Query: new Query(userSchema, store)" + "\n" + "  .where(" + "\u0022" + "age" + "\u0022" + ", " + "\u0022" + "\u003e=" + "\u0022" + ", " + "\u0022" + "18" + "\u0022" + ")" + "\n" + "  .where(" + "\u0022" + "email" + "\u0022" + ", " + "\u0022" + "!=" + "\u0022" + ", " + "\u0022" + "\u0022" + ")" + "\n" + "  .orderBy(" + "\u0022" + "age" + "\u0022" + ", " + "\u0022" + "desc" + "\u0022" + ")" + "\n" + "  .select([" + "\u0022" + "name" + "\u0022" + ", " + "\u0022" + "age" + "\u0022" + "])" + "\n" + "  .limit(2)" + "\n" + "  .all()" + "\n" + "\n" + "Results (adults with email, showing name/age only, oldest first, max 2):" + "\n" + formatted_1229;
+    return "=== Demo 5: Complex Query ===" + "\n" + "\n" + "Query: new Query(userSchema, store)" + "\n" + "  .where(" + '"' + "age" + '"' + ", " + '"' + ">=" + '"' + ", " + '"' + "18" + '"' + ")" + "\n" + "  .where(" + '"' + "email" + '"' + ", " + '"' + "!=" + '"' + ", " + '"' + '"' + ")" + "\n" + "  .orderBy(" + '"' + "age" + '"' + ", " + '"' + "desc" + '"' + ")" + "\n" + "  .select([" + '"' + "name" + '"' + ", " + '"' + "age" + '"' + "])" + "\n" + "  .limit(2)" + "\n" + "  .all()" + "\n" + "\n" + "Results (adults with email, showing name/age only, oldest first, max 2):" + "\n" + formatted_1229;
   }
   /** @returns {Schema} */
   get schema() {
@@ -885,13 +885,13 @@ function compareInt_1411(recordValue_1496, operator_1497, clauseValue_1498) {
       return_1499 = rv_1504 === cv_1505;
     } else if (operator_1497 === "!=") {
       return_1499 = rv_1504 !== cv_1505;
-    } else if (operator_1497 === "\u003e") {
+    } else if (operator_1497 === ">") {
       return_1499 = rv_1504 > cv_1505;
-    } else if (operator_1497 === "\u003c") {
+    } else if (operator_1497 === "<") {
       return_1499 = rv_1504 < cv_1505;
-    } else if (operator_1497 === "\u003e=") {
+    } else if (operator_1497 === ">=") {
       return_1499 = rv_1504 >= cv_1505;
-    } else if (operator_1497 === "\u003c=") {
+    } else if (operator_1497 === "<=") {
       return_1499 = rv_1504 <= cv_1505;
     } else {
       return_1499 = false;
@@ -911,13 +911,13 @@ function compareString_1412(recordValue_1506, operator_1507, clauseValue_1508) {
     return_1509 = recordValue_1506 === clauseValue_1508;
   } else if (operator_1507 === "!=") {
     return_1509 = recordValue_1506 !== clauseValue_1508;
-  } else if (operator_1507 === "\u003e") {
+  } else if (operator_1507 === ">") {
     return_1509 = cmpString__1510(recordValue_1506, clauseValue_1508) > 0;
-  } else if (operator_1507 === "\u003c") {
+  } else if (operator_1507 === "<") {
     return_1509 = cmpString__1510(recordValue_1506, clauseValue_1508) < 0;
-  } else if (operator_1507 === "\u003e=") {
+  } else if (operator_1507 === ">=") {
     return_1509 = cmpString__1510(recordValue_1506, clauseValue_1508) >= 0;
-  } else if (operator_1507 === "\u003c=") {
+  } else if (operator_1507 === "<=") {
     return_1509 = cmpString__1510(recordValue_1506, clauseValue_1508) <= 0;
   } else {
     return_1509 = false;
@@ -990,16 +990,16 @@ function validOperator_1530(op_1531) {
     return_1532 = "=";
   } else if (op_1531 === "!=") {
     return_1532 = "!=";
-  } else if (op_1531 === "\u003c\u003e") {
-    return_1532 = "\u003c\u003e";
-  } else if (op_1531 === "\u003e") {
-    return_1532 = "\u003e";
-  } else if (op_1531 === "\u003c") {
-    return_1532 = "\u003c";
-  } else if (op_1531 === "\u003e=") {
-    return_1532 = "\u003e=";
-  } else if (op_1531 === "\u003c=") {
-    return_1532 = "\u003c=";
+  } else if (op_1531 === "<>") {
+    return_1532 = "<>";
+  } else if (op_1531 === ">") {
+    return_1532 = ">";
+  } else if (op_1531 === "<") {
+    return_1532 = "<";
+  } else if (op_1531 === ">=") {
+    return_1532 = ">=";
+  } else if (op_1531 === "<=") {
+    return_1532 = "<=";
   } else {
     return_1532 = "=";
   }
@@ -1293,11 +1293,11 @@ export class Token extends type__1232() {
   toHtml() {
     const cls_1627 = this.cssClass();
     let t_1628 = new SafeHtmlBuilder_1629();
-    t_1628.appendSafe("\u003cspan class='");
+    t_1628.appendSafe("<span class='");
     t_1628.appendString(cls_1627);
-    t_1628.appendSafe("'\u003e");
+    t_1628.appendSafe("'>");
     t_1628.appendString(this.#value_1622);
-    t_1628.appendSafe("\u003c/span\u003e");
+    t_1628.appendSafe("<\/span>");
     return t_1628.accumulated;
   }
   /**
@@ -1543,8 +1543,8 @@ export function main() {
   }
   allUsers_1927.forEach(fn_1928);
   console_1188.log("");
-  console_1188.log("Adults (age \u003e= 18):");
-  const adults_1931 = new Query(userSchema_1918, store_1920).where("age", "\u003e=", "18").all();
+  console_1188.log("Adults (age >= 18):");
+  const adults_1931 = new Query(userSchema_1918, store_1920).where("age", ">=", "18").all();
   function fn_1932(u_1933) {
     let t_1934 = u_1933.describe();
     console_1188.log("  " + t_1934);
@@ -1556,7 +1556,7 @@ export function main() {
   const q1_1935 = new Query(userSchema_1918, store_1920);
   let t_1936 = q1_1935.toSql().toString();
   console_1188.log("SELECT all: " + t_1936);
-  const q2_1937 = new Query(userSchema_1918, store_1920).select(Object.freeze(["name", "age"])).where("age", "\u003e=", "18").orderBy("age", "desc").limit(10);
+  const q2_1937 = new Query(userSchema_1918, store_1920).select(Object.freeze(["name", "age"])).where("age", ">=", "18").orderBy("age", "desc").limit(10);
   let t_1938 = q2_1937.toSql().toString();
   console_1188.log("Complex:    " + t_1938);
   const bobby_1939 = "Robert'); DROP TABLE users;--";
@@ -1712,8 +1712,8 @@ export function highlightSource(source_1978) {
 export function highlightBlock(source_1990) {
   const highlighted_1991 = highlightSource(source_1990);
   let t_1992 = new SafeHtmlBuilder_1629();
-  t_1992.appendSafe("\u003cpre class='temper-code'\u003e\u003ccode\u003e");
+  t_1992.appendSafe("<pre class='temper-code'><code>");
   t_1992.appendSafeHtml(highlighted_1991);
-  t_1992.appendSafe("\u003c/code\u003e\u003c/pre\u003e");
+  t_1992.appendSafe("<\/code><\/pre>");
   return t_1992.accumulated;
 };
